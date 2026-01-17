@@ -168,7 +168,7 @@ Used Google Calendar API so anyone with a google account could login and automat
 
 ---
 
-### Four lessons learned
+### Three lessons learned
  1. When troubleshooting with Cursor, copy & paste the entire error log into Cursor agent
  2. For Activity #1, the second and fifth prompts were rewriting requests (e.g. summarize and professional tone) and the LLM’s output was very similar to the input. It appears that when there is a rewriting request, the prompt must be more descriptive and detailed
  3. For math prompts, the LLM’s response automatically provides ‘train of thought’ so you don’t have to ask to show LLM’s logic/reasoning
