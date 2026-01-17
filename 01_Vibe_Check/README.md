@@ -1,159 +1,136 @@
-<p align = "center" draggable="false" ><img src="https://github.com/AI-Maker-Space/LLM-Dev-101/assets/37101144/d1343317-fa2f-41e1-8af1-1dbb18399719"
-     width="200px"
-     height="auto"/>
-</p>
+# Frontend - AI Mental Coach
 
-<h1 align="center" id="heading">Session 1: Introduction and Vibe Check</h1>
+A modern Next.js frontend application for the AI Mental Coach chat interface. This application provides a beautiful, responsive chat UI that connects to the FastAPI backend.
 
-### [Quicklinks](https://github.com/AI-Maker-Space/AIE9/tree/main/00_AIE_Quicklinks)
+## Features
 
-| 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
-|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
-| [Vibe Check!](https://github.com/AI-Maker-Space/AIE9/blob/main/00_Docs/Session_Sheets/01_Vibe%20Check.md) | Coming Soon! | Coming Soon! | You are here! | Coming Soon! | Coming Soon! |
+- 🎨 Modern, clean UI with Tailwind CSS
+- 💬 Real-time chat interface with message history
+- 🌙 Dark mode support (follows system preferences)
+- 📱 Fully responsive design
+- ⚡ Fast and optimized with Next.js 14
+- 🔄 Auto-scrolling chat messages
+- ⌨️ Keyboard shortcuts (Enter to send, Shift+Enter for new line)
 
-## 🏗️ How AIM Does Assignments
+## Prerequisites
 
-> 📅 **Assignments will always be released to students as live class begins.** We will never release assignments early.
+- Node.js 18+ and npm (or yarn/pnpm)
+- OpenAI API key (set as `OPENAI_API_KEY` environment variable for production)
 
-Each assignment will have a few of the following categories of exercises:
+## Setup
 
-- ❓ **Questions** – these will be questions that you will be expected to gather the answer to! These can appear as general questions, or questions meant to spark a discussion in your breakout rooms!
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
 
-- 🏗️ **Activities** – these will be work or coding activities meant to reinforce specific concepts or theory components.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-- 🚧 **Advanced Builds (optional)** – Take on a challenge! These builds require you to create something with minimal guidance outside of the documentation. Completing an Advanced Build earns full credit in place of doing the base assignment notebook questions/activities.
+3. (Optional) For local development, create a `.env.local` file with your OpenAI API key:
+   ```bash
+   OPENAI_API_KEY=your-openai-api-key-here
+   ```
+   Note: The frontend uses Next.js API routes that call OpenAI directly - no separate backend needed!
 
-### Main Assignment
+## Running the Application
 
-In the following assignment, you are required to take the app that you created for the AIE9 challenge (from [this repository](https://github.com/AI-Maker-Space/The-AI-Engineer-Challenge)) and conduct what is known, colloquially, as a "vibe check" on the application.
+### Development Mode
 
-You will be required to submit a link to your GitHub, as well as screenshots of the completed "vibe checks" through the provided Google Form!
+Start the development server:
 
-> NOTE: This will require you to make updates to your personal class repository, instructions on that process can be found [here](https://github.com/AI-Maker-Space/AIE9/tree/main/00_Docs/Prerequisites/Initial_Setup)!
+```bash
+npm run dev
+```
 
+The application will be available at `http://localhost:3000`.
 
-#### A Note on Vibe Checking
+The development server includes:
+- Hot module replacement (HMR) for instant updates
+- Error overlay for debugging
+- Fast refresh for React components
 
->"Vibe checking" is an informal term for cursory unstructured and non-comprehensive evaluation of LLM-powered systems. The idea is to loosely evaluate our system to cover significant and crucial functions where failure would be immediately noticeable and severe.
->
->In essence, it's a first look to ensure your system isn't experiencing catastrophic failure.
+### Production Build
 
----
+Build the application for production:
 
-#### 🏗️ Activity #1: General Vibe Checking Evals
+```bash
+npm run build
+```
 
-Please evaluate your system on the following questions:
+Start the production server:
 
-1. Explain the concept of object-oriented programming in simple terms to a complete beginner.
-    - Aspect Tested:
-2. Read the following paragraph and provide a concise summary of the key points…
-    - Aspect Tested:
-3. Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.
-    - Aspect Tested:
-4. If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?
-    - Aspect Tested:
-5. Rewrite the following paragraph in a professional, formal tone…
-    - Aspect Tested:
+```bash
+npm start
+```
 
-#### ❓Question #1:
+## Project Structure
 
-Do the answers appear to be correct and useful?
-##### ✅ Answer:
+```
+frontend/
+├── app/                    # Next.js App Router directory
+│   ├── layout.tsx         # Root layout component
+│   ├── page.tsx           # Home page
+│   └── globals.css        # Global styles with Tailwind
+├── components/            # React components
+│   └── ChatInterface.tsx  # Main chat component
+├── lib/                   # Utility functions
+│   └── api.ts            # API client for backend communication
+├── types/                 # TypeScript type definitions
+│   └── chat.ts           # Chat-related types
+├── package.json          # Dependencies and scripts
+├── tsconfig.json         # TypeScript configuration
+├── tailwind.config.js    # Tailwind CSS configuration
+└── next.config.js        # Next.js configuration
+```
 
----
+## How It Works
 
-#### 🏗️ Activity #2: Personal Vibe Checking Evals (Your Assistant Can Answer)
+The frontend uses Next.js API routes (serverless functions) that directly call OpenAI:
+- Frontend → `/api/chat` (Next.js API route) → OpenAI API
+- No separate backend needed! Everything runs on Vercel serverless functions.
 
-Now test your assistant with personal questions it should be able to help with. Try prompts like:
+For local development:
+- Set `OPENAI_API_KEY` in `.env.local`
+- The Next.js API route will use it automatically
 
-- "Help me think through the pros and cons of [enter decision you're working on making]."
-- "What are the pros and cons of [job A] versus [job B] as the next step in my career?"
-- "Draft a polite follow-up [email, text message, chat message] to a [enter person details] who hasn't responded."
-- "Help me plan a birthday surprise for [person]."
-- "What can I cook with [enter ingredients] in fridge."
+For production (Vercel):
+- Set `OPENAI_API_KEY` in Vercel environment variables
+- The API route will use it automatically
 
-##### Your Prompts and Results:
-1. Prompt:
-   - Result:
-2. Prompt:
-   - Result:
-3. Prompt:
-   - Result:
+## Deployment
 
-#### ❓Question #2:
+This frontend is configured to work with Vercel. To deploy:
 
-Are the vibes of this assistant's answers aligned with your vibes? Why or why not?
-##### ✅ Answer:
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Configure environment variables if needed (`NEXT_PUBLIC_API_URL`)
+4. Deploy!
 
----
+The application will automatically build and deploy on Vercel.
 
-#### 🏗️ Activity #3: Personal Vibe Checking Evals (Requires Additional Capabilities)
+## Troubleshooting
 
-Now test your assistant with questions that would require capabilities beyond basic chat, such as access to external tools, APIs, or real-time data. Try prompts like:
+### API Connection Issues
 
-- "What does my schedule look like tomorrow?"
-- "What time should I leave for the airport?"
+If you see connection errors:
+- Verify `OPENAI_API_KEY` is set in `.env.local` (local) or Vercel environment variables (production)
+- Check browser console for specific error messages
+- Verify the `/api/chat` route is deployed (check Vercel Functions tab)
+- Test the route directly: `curl https://your-vercel-url.vercel.app/api/chat`
 
-##### Your Prompts and Results:
-1. Prompt:
-   - Result:
-2. Prompt:
-   - Result:
+### Build Errors
 
-#### ❓Question #3:
+If you encounter build errors:
+- Clear the `.next` directory: `rm -rf .next`
+- Reinstall dependencies: `rm -rf node_modules && npm install`
+- Check Node.js version: `node --version` (should be 18+)
 
-What are some limitations of your application?
-##### ✅ Answer:
+## Development Tips
 
----
-
-This "vibe check" now serves as a baseline, of sorts, to help understand what holes your application has.
-
-### 🚧 Advanced Build (OPTIONAL):
-
-Please make adjustments to your application that you believe will improve the vibe check you completed above, then deploy the changes to your Vercel domain [(see these instructions from your Challenge project)](https://github.com/AI-Maker-Space/The-AI-Engineer-Challenge/blob/main/README.md) and redo the above vibe check.
-
-> NOTE: You may reach for improving the model, changing the prompt, or any other method.
-
-#### 🏗️ Activity #1
-##### Adjustments Made:
-- _describe adjustment(s) here_
-
-##### Results:
-1. _Comment here how the change(s) impacted the vibe check of your system_
-2.
-3.
-4.
-5.
-
-
-## Submitting Your Homework
-### Main Assignment
-Follow these steps to prepare and submit your homework:
-1. Pull the latest updates from upstream into the main branch of your AIE9 repo:
-    - For your initial repo setup see [Initial_Setup](https://github.com/AI-Maker-Space/AIE9/tree/main/00_Docs/Prerequisites/Initial_Setup)
-    - To get the latest updates from AI Makerspace into your own AIE9 repo, run the following commands:
-    ```
-    git checkout main
-    git pull upstream main
-    git push origin main
-    ```
-2. **IMPORTANT:** Start Cursor from the `01_Prototyping_Best_Practices_and_Vibe_Check` folder (you can also use the _File -> Open Folder_ menu option of an existing Cursor window)
-3. Edit this `README.md` file (the one in your `AIE9/01_Prototyping_Best_Practices_and_Vibe_Check` folder)
-4. Complete all three Activities:
-    - **Activity #1:** Evaluate your system using the general vibe checking questions and define the "Aspect Tested" for each
-    - **Activity #2:** Test your assistant with personal prompts it should be able to answer
-    - **Activity #3:** Test your assistant with prompts requiring additional capabilities
-5. Provide answers to all three Questions (`❓Question #1`, `❓Question #2`, `❓Question #3`)
-6. Add, commit and push your modified `README.md` to your origin repository's main branch.
-
-When submitting your homework, provide the GitHub URL to your AIE9 repo.
-
-### The Advanced Build:
-1. Follow all of the steps (Steps 1 - 6) of the Main Assignment above
-2. Document what you changed and the results you saw in the `Adjustments Made:` and `Results:` sections of the Advanced Build
-3. Add, commit and push your additional modifications to this `README.md` file to your origin repository.
-
-When submitting your homework, provide the following on the form:
-+ The GitHub URL to your AIE9 repo.
-+ The public Vercel URL to your updated Challenge project on your AIE9 repo.
+- Use the browser's developer tools to inspect network requests
+- Check the console for any error messages
+- The chat interface auto-scrolls to show the latest messages
+- Messages are stored in component state (not persisted to a database)
